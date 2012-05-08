@@ -1,0 +1,24 @@
+<%
+    User user = User.findByID(context, context.getUserName());
+%>
+
+<div id = "myInfo" class="userInfo">
+	<img alt="close" src='<%=ThemeConfig.get("root")+"/images/whitecloseX.gif"%>' style="float:right; cursor:pointer;" onclick="javascript:catalogHelper.hideMyInfo();">
+	<%
+	if(user != null && user.getFirstName().length()>0){
+	%>
+		<b><%=ThemeLocalizer.getString(catalogResourceBundle,"Name")%>: </b><br/>
+		<%=user.getFirstName()%> <%=user.getLastName()%><br/>
+		<b><%=ThemeLocalizer.getString(catalogResourceBundle,"Email")%>: </b><br/>
+		<%=user.getEmail()%><br/>
+		<b><%=ThemeLocalizer.getString(catalogResourceBundle,"Phone")%>: </b><br/>
+		<%=user.getPhoneNumber()%><br/>
+		<b><%=ThemeLocalizer.getString(catalogResourceBundle,"Department")%>:</b><br/>
+		<%=user.getDepartment()%> <br/>
+	<%}else{%>
+		<p><%=ThemeLocalizer.getString(catalogResourceBundle,"You were not found in the Sample People form")%>. </p>
+		<p>
+		<a href="DisplayPage?name=UpdatePersonInfo"><%=ThemeLocalizer.getString(catalogResourceBundle,"Update My Record")%></a>
+		</p>
+	<%}%>
+</div>

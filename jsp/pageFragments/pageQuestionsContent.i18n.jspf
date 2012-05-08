@@ -1,0 +1,10 @@
+<%
+       com.kd.ksr.beans.Page ppage = com.kd.ksr.cache.PageCache.getPageByInstanceId(customerSurvey.getSurveyTemplateInstanceID(), customerSurvey.getPageInstanceID());
+        SimpleEntry[] questions = ppage.getPageQuestions();
+        String pageContent = customerSurvey.getQuestions();
+%>   
+
+<%@include file="../pageFragments/templateLocalize.i18n.jspf" %>
+
+<%= pageContent %>
+

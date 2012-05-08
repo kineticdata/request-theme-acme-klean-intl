@@ -1,0 +1,72 @@
+<%--
+    This file should be included in any bundle or package pages that render a
+    Kinetic SR form in display mode.  The file defines the HTML body content
+    responsible for rendering the Kinetic form to the client.
+
+    This file includes the current Kinetic SR form page content.  The page
+    content, which will typically include one or more questions and a submit or
+    next page button, is displayed within the pageQuestionsForm.  This HTML form
+    will send the answer content to the Kinetic SubmitPage servlet for
+    processing.  This servlet will typically send a HTTP (302) Moved response
+    to redirect the client to the next page.
+
+    In general, this file should not be modified.
+--%>
+<!-- START Kinetic Form Content -->
+<form name='pageQuestionsForm' id='pageQuestionsForm' class='pageQuestionsForm' method='post' action='SubmitPage'>
+    <%
+      java.util.Map<String,String> enMap = new java.util.LinkedHashMap();
+      enMap.put("What is your first name?", "What is your first name?");
+      enMap.put("What is your last name?", "What is your last name?");
+      java.util.Map<String,String> frMap = new java.util.LinkedHashMap();
+      frMap.put("What is your first name?", "Quel est votre prénom?");
+      frMap.put("What is your last name?", "Quel est votre nom?");
+      java.util.Map<String,String> deMap = new java.util.LinkedHashMap();
+      deMap.put("What is your first name?", "Was ist Ihr Vorname?");
+      deMap.put("What is your last name?", "Was ist Ihr Nachname?");
+      
+      java.util.Map<String,java.util.Map<String,String>> languageMap = new java.util.LinkedHashMap();
+      languageMap.put("english", enMap);
+      languageMap.put("french", frMap);
+      languageMap.put("german", deMap);
+      
+      String language = request.getParameter("language");
+      if (language==null) language="english";
+      java.util.Map translationMap = languageMap.get(language);
+      
+    %>
+
+    <!-- Kinetic SR Form Page Content -->
+    <%
+    String pageContent = customerSurvey.getQuestions();
+    
+    if (!language.equals("english")){
+        long startSub = System.currentTimeMillis();
+        java.util.Iterator iterator=translationMap.entrySet().iterator();
+        while(iterator.hasNext()){
+           java.util.Map.Entry mapEntry=(java.util.Map.Entry)iterator.next();
+        System.out.println("Entry:"+(String)mapEntry.getKey()+" Value:"+(String)mapEntry.getValue());
+            pageContent = pageContent.replaceAll((String)mapEntry.getKey(), (String)mapEntry.getValue());
+        }
+        long endSub = System.currentTimeMillis();
+        System.out.println("End Substition:"+(endSub-startSub)+"ms");
+   }
+    %>
+    
+    <%= pageContent %>
+
+    <!-- Kinetic SR Reference Values -->
+    <% if (request.getParameter("srv") != null) { %>
+    <input type="hidden" name="srv" value="<%=request.getParameter("srv")%>"/>
+    <% } %>
+    <% if (request.getParameter("csrv") != null) { %>
+    <input type="hidden" name="csrv" value="<%=request.getParameter("csrv")%>"/>
+    <% } %>
+
+    <!-- Kinetic SR State Values -->
+    <input type="hidden" name="templateID" id= "templateID" value="<%=customerSurvey.getSurveyTemplateInstanceID()%>"/>
+    <input type="hidden" name="sessionID" id="sessionID" value="<%=customerSurvey.getCustomerSessionInstanceID()%>"/>
+    <input type="hidden" name="surveyRequestID" id="surveyRequestID" value="<%=customerSurvey.getCustomerSurveyRequestID()%>"/>
+    <input type="hidden" name="pageID" id="pageID"value="<%=customerSurvey.getPageInstanceID()%>"/>
+</form>
+<!--   END Kinetic Form Content -->

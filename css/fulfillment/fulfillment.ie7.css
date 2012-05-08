@@ -1,0 +1,11 @@
+
+#taskPanels {
+/*	height:expression(if (this.parent.clientHeight==undefined||this.parent.clientHeight<500){"500px"}else{"auto"});*/
+	/* Used intead of min-height. */
+	/* Should be overriden buy specific panels as required. */
+	height:500px; 
+}
+
+#mainNavigation {
+    width: 451px;
+}

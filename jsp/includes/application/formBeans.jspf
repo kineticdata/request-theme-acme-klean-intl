@@ -1,0 +1,3 @@
+<%-- Include the beans that will be referenced by this page. --%>
+<jsp:useBean id="customerSurvey" scope="request" class="com.kd.kineticSurvey.beans.CustomerSurvey"/>
+<jsp:useBean id="UserContext" scope="session" class="com.kd.kineticSurvey.beans.UserContext"/>

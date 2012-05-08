@@ -1,0 +1,39 @@
+<%!
+    public static class SupportGroup {
+        public static final String FORM_NAME = "CTM:Support Group Assoc LookUp";
+        public static final String FIELD_GROUP_NAME = "1000000015";
+        public static final String FIELD_GROUP_ID = "1000000079";
+        public static final String FIELD_LOGIN_ID = "4";
+        public static final String FIELD_FULL_NAME = "1000000017";
+		
+
+        public static final String[] FIELD_IDS = new String[] {
+        	FIELD_GROUP_NAME, FIELD_GROUP_ID, FIELD_LOGIN_ID, FIELD_FULL_NAME
+        };
+
+        public static SupportGroup[] find(HelperContext context, String qualification) {
+        	SupportGroup[] results = new SupportGroup[0];
+
+            SimpleEntry[] entries = Base.find(context, FORM_NAME, qualification, FIELD_IDS);
+            if (entries != null && entries.length > 0) {
+                results = new SupportGroup[entries.length];
+                for(int i=0;i<results.length;i++) {
+                    results[i] = new SupportGroup(entries[i]);
+                }
+            }
+
+            return results;
+        }
+
+        private SimpleEntry entry = null;
+
+        public SupportGroup(SimpleEntry entry) {
+            this.entry = entry;
+        }
+
+        public String getGroupName() {return entry.getEntryFieldValue(FIELD_GROUP_NAME);}
+        public String getGroupID() {return entry.getEntryFieldValue(FIELD_GROUP_ID);}
+        public String getLoginName() {return entry.getEntryFieldValue(FIELD_LOGIN_ID);}
+        public String getFullName() {return entry.getEntryFieldValue(FIELD_FULL_NAME);}
+    }
+%>

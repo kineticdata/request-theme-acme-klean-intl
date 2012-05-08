@@ -1,0 +1,15 @@
+<form name='pageQuestionsForm' id='pageQuestionsForm' class='pageQuestionsForm' method='post' action='SubmitPage'>
+        <%@ include file="pageQuestionsContent.i18n.jspf" %>
+
+	<% if (request.getParameter("srv")!= null) {%>
+	<input type="hidden" name="srv" value="<%=request.getParameter("srv")%>"/>
+	<%}%>
+	<% if (request.getParameter("csrv")!= null) {%>
+		<input type="hidden" name="csrv" value="<%=request.getParameter("csrv")%>"/>
+	<%}%>
+
+	<input type="hidden" name="templateID" id= "templateID" value="<jsp:getProperty name="customerSurvey" property="surveyTemplateInstanceID"/>"/>
+	<input type="hidden" name="sessionID" id="sessionID" value="<jsp:getProperty name="customerSurvey" property="customerSessionInstanceID"/>"/>
+	<input type="hidden" name="surveyRequestID" id="surveyRequestID" value="<jsp:getProperty name="customerSurvey" property="customerSurveyRequestID"/>"/>
+	<input type="hidden" name="pageID" id="pageID"value="<jsp:getProperty name="customerSurvey" property="pageInstanceID"/>"/>
+</form>

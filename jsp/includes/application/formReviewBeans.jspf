@@ -1,0 +1,17 @@
+<%-- Include the beans that will be referenced by this page. --%>
+<jsp:useBean id="RequestPages" scope="request" class="java.util.Vector"/>
+<jsp:useBean id="UserContext" scope="session" class="com.kd.kineticSurvey.beans.UserContext"/>
+<jsp:useBean id="customerSurvey" scope="request" class="com.kd.kineticSurvey.beans.CustomerSurvey"/>
+
+<%
+com.kd.kineticSurvey.beans.CustomerSurveyReview customerSurveyReview = null;
+customerSurveyReview = (com.kd.kineticSurvey.beans.CustomerSurveyReview) RequestPages.get(0);
+%>
+<%-- We need to reset the CustomerSurvey bean with values that are used by common jsp/jspf code. --%>
+<jsp:setProperty name="customerSurvey" property="surveyTemplateName" value="<%=customerSurveyReview.getSurveyTemplateName() %>" />
+<jsp:setProperty name="customerSurvey" property="successMessage" value="<%=customerSurveyReview.getSuccessMessage() %>" />
+<jsp:setProperty name="customerSurvey" property="errorMessage" value="<%=customerSurveyReview.getErrorMessage() %>" />
+<jsp:setProperty name="customerSurvey" property="customerSessionInstanceID" value="<%=customerSurveyReview.getCustomerSessionInstanceID() %>" />
+<jsp:setProperty name="customerSurvey" property="customerSurveyInstanceID" value="<%=customerSurveyReview.getCustomerSurveyInstanceID() %>" />
+<jsp:setProperty name="customerSurvey" property="surveyTemplateInstanceID" value="<%=customerSurveyReview.getSurveyTemplateInstanceID() %>" />
+<jsp:setProperty name="customerSurvey" property="submitType" value="ReviewRequest" />

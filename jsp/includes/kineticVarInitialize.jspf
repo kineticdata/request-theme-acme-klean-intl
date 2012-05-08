@@ -1,0 +1,33 @@
+<%--
+  Javascript
+    Include the custom javascript file if one has been uploaded as an attachment
+    on the Advanced Tab of the Service Catalog Console.
+--%>
+<% if(!ThemeHelper.isBlank(customerSurvey.getJavascriptFileName())) { %>
+<!-- Include the Javascript attached to the Template. -->
+<script type="text/javascript" src="<%= customerSurvey.getJavascriptFileName() %>"></script>
+<% } %>
+
+<script type="text/javascript">
+	function ks_initSessionVars(){
+		<% String theme = (String)ThemeConfig.get("root");
+			theme = theme.substring(theme.indexOf("themes"))+"/";
+		%>
+		clientManager.themesDirectory = '<%= theme%>';
+		clientManager.successMessage = '<jsp:getProperty name="customerSurvey"  property="successMessage" /><jsp:getProperty name="UserContext" property="successMessage" />';
+		clientManager.errorMessage = '<jsp:getProperty name="customerSurvey"  property="errorMessage" /><jsp:getProperty name="UserContext" property="errorMessage" />';
+		clientManager.sessionId='<jsp:getProperty name="customerSurvey" property="customerSessionInstanceID"/>';
+		clientManager.customerSurveyId='<jsp:getProperty name="customerSurvey" property="customerSurveyInstanceID"/>';
+		clientManager.authenticated=<%= UserContext.isAuthenticated()%>;
+		clientManager.userName='<%= UserContext.getUserName()%>';
+		clientManager.templateId='<jsp:getProperty name="customerSurvey" property="surveyTemplateInstanceID"/>';
+		clientManager.submitType='<jsp:getProperty name="customerSurvey" property="submitType"/>'
+		clientManager.originatingPage='<%= UserContext.getOriginatingPage()%>';
+		clientManager.authenticationType='<%= UserContext.getAuthenticationType()%>';
+		clientManager.isAuthenticationRequired='<%= customerSurvey.isAuthenticationRequired()%>';
+		clientManager.isNewPage=<jsp:getProperty name="customerSurvey" property="isNewPage"/>;
+		clientManager.catalogName='<%=ThemeConfig.get("catalogName")%>';
+	}
+
+	var clientManager= KD.utils.ClientManager;
+</script>

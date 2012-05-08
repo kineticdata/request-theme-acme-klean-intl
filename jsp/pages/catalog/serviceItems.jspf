@@ -1,0 +1,160 @@
+<%-- Format a list of KS_RQT_SurveyTemplateAttrInst_Category_join entries in boxes by category including link to the template and title --%>
+<%
+Template[] templates = catalog.getTemplates(context);
+
+if (templates != null && templates.length >0) {
+	java.util.Hashtable categoryOrder = new java.util.Hashtable();
+	java.util.SortedMap categoryItemsHash = new java.util.TreeMap();
+	java.util.Hashtable serviceItemsHash = new java.util.Hashtable();
+
+	for (int i = 0; i < templates.length; i++) {
+		Template template = templates[i];
+
+		String categoryName = template.getCategory();
+                String templateId = template.getId();
+		Integer categorySortOrder = new Integer((template.getCategorySortOrder().equals("")?"0":template.getCategorySortOrder()));
+		Integer si_priority = new Integer((template.getPriority().equals("")?"0":template.getPriority()));
+		String formattedTemplateId = String.format("%03d", si_priority.intValue()) + "__" + templateId;
+			
+		if (categoryOrder.get(categoryName)==null) {
+                    categoryOrder.put(categoryName, categorySortOrder);
+		}
+		
+		Integer order = (Integer)categoryOrder.get(categoryName);
+		
+		categoryName = String.format("%03d",order.intValue())+"__"+categoryName;  
+
+		java.util.SortedMap serviceItems = (java.util.SortedMap)categoryItemsHash.get(categoryName);
+		if (serviceItems==null) {
+			serviceItems = new java.util.TreeMap();
+		}
+		serviceItems.put(formattedTemplateId, template);
+
+		categoryItemsHash.put(categoryName, serviceItems);
+		serviceItemsHash.put(formattedTemplateId, template);
+	}
+%>
+
+<div id='serviceItemsHolder'>
+	<div id='categoryItems'>
+<%
+	for (java.util.Iterator i = categoryItemsHash.keySet().iterator() ; i.hasNext() ;) {
+		String categoryName = (String) i.next();
+		categoryName = categoryName.substring(5);
+		
+		String categoryID=categoryName.replaceAll(" ", "");
+%>		
+		<div id='category_<%=categoryID%>'class='categoryItem' onclick='catalogHelper.selectCategory(this)'>
+			<div class="category_item_label" onmouseover="catalogHelper.highlightCategory(this)" onmouseout="catalogHelper.removeHighlightCategory(this)" onmouseleave="catalogHelper.removeHighlightCategory(this)"><%=ThemeLocalizer.getString(categoryResourceBundle,categoryName) %></div>
+		</div>
+<%
+	}
+%>
+	
+		<div id='quick_links'>
+			<div id='quick_links_border'>
+				<div id='quick_links_label' class="rounded6">
+					<%=ThemeLocalizer.getString(catalogResourceBundle,"Quick Links") %>
+				</div>
+				<div id='quick_links_holder'>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id='categoryServiceItems' class='categoryServiceItemsDiv rounded6 curvyRedraw'>
+		<div id='serviceItemsList_holder'>
+		</div>
+		<div id='serviceItemLaunch_holder'>
+		</div>
+	</div>
+
+	<div id='serviceItemPlaceholder' style="display: none;">
+<%
+
+	for (java.util.Iterator i = categoryItemsHash.keySet().iterator() ; i.hasNext() ;) {
+		String categoryName = (String) i.next();
+		String categoryID=categoryName.replaceAll(" ", "");
+		categoryID = categoryID.substring(5);
+		
+		%>
+		<div id='serviceItems_<%=categoryID %>' style='display:none;'>
+			<%
+			java.util.SortedMap serviceItems = (java.util.SortedMap)categoryItemsHash.get(categoryName);
+			for (java.util.Iterator esi = serviceItems.keySet().iterator() ; esi.hasNext() ;) {
+			try {
+				String key = (String)esi.next();
+				
+				Template template = (Template) serviceItems.get(key);
+				String templateName = ThemeLocalizer.getString(serviceItemsResourceBundle,template.getName());
+                String templateId = template.getId();
+			%>
+				<div id='serviceItem_<%=templateId %>' class='serviceItem_item' onclick='catalogHelper.selectServiceItem(this)'  onmouseover="catalogHelper.highlightServiceItem(this)" onmouseout="catalogHelper.removeHighlightServiceItem(this)" onmouseleave="catalogHelper.removeHighlightServiceItem(this)"><%=templateName %></div>
+			<%
+			} catch (Exception ee) {
+			%>
+			<p> <%=ee%></p>
+			<%
+			}
+			}
+			%>
+		</div>
+	<%	
+	}
+
+%>
+	</div>
+	
+	<div id='serviceItemLaunch_Placeholder' style="display: none;">
+<%
+
+	for (java.util.Enumeration e = serviceItemsHash.keys() ; e.hasMoreElements() ;) {
+		String formattedTemplateID = (String) e.nextElement();
+        String templateID = formattedTemplateID.substring(5);
+		
+		Template template = (Template)serviceItemsHash.get(formattedTemplateID);
+		String description = template.getDescription();
+		%>
+		
+		<div id='launch_<%=templateID %>' class='launch_serviceItem'>
+			<div id="descriptionContainer_<%=templateID%>" class="descriptionContainer">
+                <div id="descriptionText_<%=templateID%>" class="descriptionText">
+                </div>
+		<% if (description.indexOf("http://") ==-1) {
+		%>
+                 <div class='continueButton rounded6X'>
+        			<% String URL = "DisplayPage?srv="+java.net.URLEncoder.encode(templateID, "UTF-8"); %>
+                    <input type="button" class="templateButton" value="<%=ThemeLocalizer.getString(catalogResourceBundle,"Request")%>" onclick="window.location='<%=URL%>'; this.disabled='disabled';" title=""/>
+                </div>
+ 		<%}%>
+                    
+            </div>
+            
+        </div>
+        
+	<%
+	}
+
+	%>
+	
+		<div class="launch_serviceItem" id="launch_NotCategorized" style="display: block;">
+			<div class="descriptionContainer">
+                <div class="descriptionText">
+                    <p><%=ThemeLocalizer.getString(catalogResourceBundle,"This service item has not been categorized") %>.</p>
+                </div>
+                <div class="continueButton rounded6">
+                    <input type="button" title="" value="<%=ThemeLocalizer.getString(serviceItemsResourceBundle,"Request")%>" class="templateButton UncategorizedServiceItemButton "/>
+                </div>
+			</div>	
+		</div>
+	</div>
+</div>
+	
+<%
+
+} else {
+%>
+    <p><%=ThemeLocalizer.getString(catalogResourceBundle,"No Category results found") %></p>
+<%
+}
+%>

@@ -1,0 +1,3 @@
+<form name="searchCriteria" id="searchCriteria" class="compactQuestion">
+	<jsp:getProperty name="customerSurvey" property="questions"/>
+</form>

@@ -1,0 +1,93 @@
+.actionButtons {
+	float: left;
+	clear: both;
+	width: 50%;
+}
+
+.questionAnswer {
+	float: left;	
+}
+#searchTaskPanel_TableDiv {
+	clear: both;
+}
+.compactQuestion .questionLayer {
+    clear: none;
+    float: left;
+    width: 200px;
+}
+.compactQuestion .questionLabel {
+	width: 200px;	
+}
+
+html, body {
+	height: auto;
+}
+
+.contentPageSection {
+    margin-left: 1%;
+    margin-right: 1%;
+    width: auto;
+}
+
+.catalogTitleSection{
+    left: 10px;
+    margin-bottom: 5px;
+    width: 99%;
+}
+
+#mainNavigation {
+    background-color: #99CC99;
+    clear: both;
+    float: left;
+    left: 10px;
+    width: auto;
+}
+
+.divider {
+    border-left: 2px solid white;
+    float: left;
+    height: 25px;
+    margin-bottom: 2px;
+    margin-top: 2px;
+    width: 2px;
+}
+
+.templateContent.catalogTemplate {
+	width: 100%;
+}
+
+.navigationItem {
+    float: left;
+    font-size: 1.3em;
+    height: 20px;
+    padding: 5px 10px;
+}
+.navigationItem a {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+}
+.navigationItemActive {
+    background-color: #009900;
+}
+
+#taskPanels {
+    clear: both;
+    float: left;
+    left: 10px;
+    width: 99%;
+    height: auto;
+}
+
+.taskPanel {
+	width: 100%;
+	min-height: 450px;	
+	
+}
+
+.hide {
+	display: none;
+}
+.show {
+	display: block;
+}

@@ -1,0 +1,149 @@
+<%
+        long startSub = System.currentTimeMillis();
+                
+        // Localize the templateButtom like Submit and Previous
+        {
+            String pat = "(<input id='SUBMIT_.*>|<input id='PREV_.*>)";
+            java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(pat);
+            java.util.regex.Matcher matcher = pattern.matcher(pageContent);
+
+            // Build up the results string
+            StringBuilder builder = new StringBuilder();
+            int lastMatch = 0;
+            while(matcher.find()) {
+                // Retrieve the necessary values
+                String preMatch = pageContent.substring(lastMatch, matcher.start());
+                String buttonDiv = matcher.group(1);
+                buttonDiv=buttonDiv.replaceAll("= '", "='");
+                if (buttonDiv.indexOf("value='")==-1) continue;
+                int startIndex=buttonDiv.indexOf("value='")+"value='".length();
+                String buttonValue = buttonDiv.substring(startIndex, buttonDiv.indexOf("'", startIndex)); 
+
+                buttonDiv=buttonDiv.replaceAll("value='"+buttonValue+"'", "value='"+ThemeLocalizer.getString(catalogResourceBundle,buttonValue)+"'");
+                // Append any part of the qualification that exists before the match
+                builder.append(preMatch);
+                builder.append(buttonDiv);
+                // Set the lastMatch index for use in the next loop
+                lastMatch = matcher.end();
+            }
+            // Append any part of the qualification remaining after the last match
+            builder.append(pageContent.substring(lastMatch));
+            pageContent = builder.toString();
+
+        }    
+        if (templateResourceBundle != null){
+            for (SimpleEntry questionEntry : questions) {
+                com.kd.ksr.beans.Question question = new com.kd.ksr.beans.Question(questionEntry);
+                String pat = "(id='QLABEL_"+question.getId()+".*>)(.*) ";
+                java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(pat);
+                java.util.regex.Matcher matcher = pattern.matcher(pageContent);
+
+                // Build up the results string
+                StringBuilder builder = new StringBuilder();
+                int lastMatch = 0;
+                while(matcher.find()) {
+                    // Retrieve the necessary values
+                    String preMatch = pageContent.substring(lastMatch, matcher.start());
+                    String preLabel = matcher.group(1);
+                    String label = matcher.group(2);
+                    // Append any part of the qualification that exists before the match
+                    builder.append(preMatch);
+                    // Append the encoded parameter value
+                    //System.out.println("Question Label:"+label+" translated:"+ThemeLocalizer.getString(catalogResourceBundle,label));
+                    builder.append(preLabel+ThemeLocalizer.getString(templateResourceBundle,label));
+                    // Set the lastMatch index for use in the next loop
+                    lastMatch = matcher.end();
+                }
+                // Append any part of the qualification remaining after the last match
+                builder.append(pageContent.substring(lastMatch));
+                pageContent = builder.toString();
+            }
+            
+            // Find all LOCALIZE_TEMPLATE tags and translate
+            // These Tags will translate based on the service item template resource bundle
+            java.util.List<String> matchedTmplValues = new java.util.ArrayList<String>();
+            String localizeTmplPat = "<LOCALIZE_TEMPLATE>(.*?)</LOCALIZE_TEMPLATE>";
+            java.util.regex.Pattern localizeTmplPattern = java.util.regex.Pattern.compile(localizeTmplPat);
+            java.util.regex.Matcher localizeTmplMatcher = localizeTmplPattern.matcher(pageContent);
+
+            while(localizeTmplMatcher.find()) {
+                String matchString = localizeTmplMatcher.group();
+                matchedTmplValues.add(matchString);
+            }
+
+            java.util.Iterator<String> tmpl_iterator = matchedTmplValues.iterator();
+            while (tmpl_iterator.hasNext()) {
+                String matchString = (String)tmpl_iterator.next();
+                String origValue=matchString.replaceFirst("<LOCALIZE_TEMPLATE>", "")
+                                                    .replaceFirst("</LOCALIZE_TEMPLATE>", "");
+
+                String translatedValue=ThemeLocalizer.getString(templateResourceBundle,origValue);
+
+                pageContent=pageContent.replaceAll(matchString, translatedValue);
+            }
+            // END LOCALIZE_SI
+            
+            // END LOCALIZE_TEMPLATE
+            
+        }        
+        // Find all LOCALIZE_CAT tags and translate
+        // These Tags will translate based on the Catalog resource bundle
+        java.util.List<String> matchedCatValues = new java.util.ArrayList<String>();
+        String localizeCatPat = "<LOCALIZE_CAT>(.*?)</LOCALIZE_CAT>";
+        java.util.regex.Pattern localizeCatPattern = java.util.regex.Pattern.compile(localizeCatPat);
+        java.util.regex.Matcher localizeCatMatcher = localizeCatPattern.matcher(pageContent);
+
+        while(localizeCatMatcher.find()) {
+            String matchString = localizeCatMatcher.group();
+            matchedCatValues.add(matchString);
+        }
+
+        java.util.Iterator<String> cat_iterator = matchedCatValues.iterator();
+	while (cat_iterator.hasNext()) {
+            String matchString = (String)cat_iterator.next();                
+            String origValue=matchString.replaceFirst("<LOCALIZE_CAT>", "")
+						.replaceFirst("</LOCALIZE_CAT>", "");
+            String translatedValue=ThemeLocalizer.getString(catalogResourceBundle,origValue);
+            //System.out.println("Value:"+origValue+" translate:"+translatedValue);
+            
+            pageContent=pageContent.replaceAll(matchString, translatedValue);
+	}
+        // END LOCALIZE_CAT
+        
+        // Find all LOCALIZE_SI tags and translate
+        // These Tags will translate based on the service items resource bundle
+        java.util.List<String> matchedSIValues = new java.util.ArrayList<String>();
+        String localizeSIPat = "<LOCALIZE_SI>(.*?)</LOCALIZE_SI>";
+        java.util.regex.Pattern localizeSIPattern = java.util.regex.Pattern.compile(localizeSIPat);
+        java.util.regex.Matcher localizeSIMatcher = localizeSIPattern.matcher(pageContent);
+
+        while(localizeSIMatcher.find()) {
+            String matchString = localizeSIMatcher.group();
+            matchedSIValues.add(matchString);
+        }
+
+        java.util.Iterator<String> si_iterator = matchedSIValues.iterator();
+	while (si_iterator.hasNext()) {
+            String matchString = (String)si_iterator.next();
+            String origValue=matchString.replaceFirst("<LOCALIZE_SI>", "")
+						.replaceFirst("</LOCALIZE_SI>", "");
+            
+            String translatedValue=ThemeLocalizer.getString(serviceItemsResourceBundle,origValue);
+            
+            pageContent=pageContent.replaceAll(matchString, translatedValue);
+	}
+        // END LOCALIZE_SI
+                        
+        // Look for the <LOCALIZE_SERVICE_ITEM_DESCRIPTION> TAG
+        // If found replace with the resourceBundle stored value
+        if (pageContent.indexOf("<LOCALIZE_SERVICE_ITEM_DESCRIPTION>")>=0){
+            String templateName = customerSurvey.getSurveyTemplateName();
+            templateName = templateName.replaceAll(" ","_");
+            String localizedDescription = ThemeLocalizer.getString(serviceItemsResourceBundle,templateName+"_DESCRIPTION");
+            pageContent=pageContent.replace("<LOCALIZE_SERVICE_ITEM_DESCRIPTION>", localizedDescription);
+        }
+        // END LOCALIZE_SERVICE_ITEM_DESCRIPTION
+        long endSub = System.currentTimeMillis();
+        System.out.println("End Substition:"+(endSub-startSub)+"ms");
+        
+%>

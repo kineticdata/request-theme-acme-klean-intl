@@ -1,0 +1,21 @@
+<div id="headerSection" class="headerSection">
+	<div class="returnToCatalog roundedBottom6">
+		<a href='DisplayPage?name=<%=ThemeConfig.get("portalName")%>' class="returnToCatalogLink"><%=ThemeLocalizer.getString(catalogResourceBundle,"Return to Catalog")%></a>
+	</div>
+	<div class="headerLogout roundedBottom6">
+		<a href="KSAuthenticationServlet?Logout=true" class="logout"><%=ThemeLocalizer.getString(catalogResourceBundle,"Logout")%> </a>
+	</div>
+	<div class="KSR_Number">
+		<%String requestID="";
+		  if (customerSurvey != null && customerSurvey.getCustomerSurveyBase()!=null) {
+		    String originatingID = (String)customerSurvey.getCustomerSurveyBase().getEntryFieldValue("700088607");
+		    if (originatingID!=null && originatingID.length()>0) {
+		    	requestID=originatingID;
+		    } else {
+				requestID=(String)customerSurvey.getCustomerSurveyBase().getEntryFieldValue("1");
+			}
+		  }
+		%>
+		<%=requestID%>
+	</div>
+</div>

@@ -1,0 +1,17 @@
+<head>
+<link rel="shortcut icon" href="<%=request.getContextPath()%>/favicon.ico" type="image/x-icon"/>
+<title>
+<jsp:getProperty name="customerSurvey" property="surveyTemplateName"/>
+</title>
+
+<%@ include file="../yuiInclude.jspf" %>
+<%@ include file="../kdInclude.jspf" %>
+<%@ include file="../../helpers/reviewFunctions.jspf"%>
+
+<%--Include Remedy-created style/javascript info--%>
+<jsp:getProperty name="customerSurvey" property="styleInfo"/>
+<jsp:getProperty name="customerSurvey" property="customHeaderContent"/>
+
+<%@include file="../kineticVarInitialize.jspf"%>
+
+</head>

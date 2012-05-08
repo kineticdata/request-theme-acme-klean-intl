@@ -1,0 +1,21 @@
+<%@include file="../../models/fulfillment/supportGroup.jspf"%>
+<%
+	/* Load the current users Support Groups and store as a set of JavaScript variables.
+	*/
+	String qualification = "'Login ID'=\""+context.getUserName()+"\"";
+	SupportGroup[] groups = SupportGroup.find(context, qualification);
+	
+	String groupIDs ="";
+	String groupNames ="";
+	for (int i=0; i<groups.length; i++){
+		if (groupIDs.length()>0) groupIDs+=",";
+		groupIDs+=groups[i].getGroupID();
+		
+		if (groupNames.length()>0) groupNames+=",";
+		groupNames+=groups[i].getGroupName();
+	}
+%>
+<script>
+var groupIDs = "<%=groupIDs%>";
+var groupNames = "<%=groupNames%>";
+</script>

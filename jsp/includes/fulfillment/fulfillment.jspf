@@ -1,0 +1,8 @@
+<link rel="stylesheet" type="text/css" href="<%=(String)ThemeConfig.get("root")+"/css/fulfillment/fulfillment.css"%>" />
+<!--[if IE 6]>
+<link rel="stylesheet" type="text/css" href="<%=(String)ThemeConfig.get("root")+"/css/fulfillment/fulfillment.ie6.css"%>" />
+<![endif]-->
+<!--[if IE 7]>
+<link rel="stylesheet" type="text/css" href="<%=(String)ThemeConfig.get("root")+"/css/fulfillment/fulfillment.ie7.css"%>" />
+<![endif]-->
+<script type="text/javascript" src="<%=ThemeConfig.get("root") + "/js/fulfillment/fulfillment.js"%>"></script>

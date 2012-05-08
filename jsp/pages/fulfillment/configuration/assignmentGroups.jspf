@@ -1,0 +1,106 @@
+<%
+    /**
+     * This file configures the Submission groupings.  Submission groupings
+     * control how the Kinetic Request submission lists are displayed within
+     * the Service Portal page.  Submission groups are the high level 
+     * collections of submissions, each containing one or more subgroupings.
+     * 
+     * Submission groups will be rendered as Portal header links and Submission
+     * subgroups will be rendered as tabs within their parent group's page.
+     * Each subgroup will display the total count and a table of most recent X 
+     * submissions (configurable below).
+     */
+
+    if (AssignmentGroupManager.getGroups().length == 0) {
+	    // Define the base Qualification, this will be appended to the following
+	    // qualifications.
+	    // Ensure that all queries are limited by the users Support Groups Associations.
+	    // Refer to supportGroupIDs as a variable configured in assignments.jsp
+	    String baseQualification =
+	        "'"+Assignment.FIELD_CATALOG+"' = \""+ThemeConfig.get("catalogName")+"\" AND \""+supportGroupIDs+"\" LIKE (\"%\"+'"+Assignment.FIELD_ASSIGNED_GROUP_ID+"'+\"%\")" ;
+	
+	    // Define the Requests group
+	    AssignmentGroupManager.addAssignmentGroup("Tasks");
+	    // Define and add each of the Requests group subgroupings
+	    String myTasksQualification = baseQualification + " AND " +
+	        "'"+Assignment.FIELD_STATUS+"' = \"Assigned\" AND " +
+	        "'"+Assignment.FIELD_ASSIGNED_IND_ID+"' = \""+UserContext.getUserName()+"\"";
+	    AssignmentGroupManager.addAssignmentSubgroup("Tasks", "My", myTasksQualification);
+	    
+	    String openTasksQualification = baseQualification + " AND " +
+	            "'"+Assignment.FIELD_STATUS+"' < \"Cancelled\"";
+	    AssignmentGroupManager.addAssignmentSubgroup("Tasks", "Open", openTasksQualification);
+	    
+	    String unassignedTasksQualification = baseQualification + " AND " +
+	            "'"+Assignment.FIELD_STATUS+"' = \"New\"";
+	    AssignmentGroupManager.addAssignmentSubgroup("Tasks", "Unassigned", unassignedTasksQualification);
+
+	    String searchTasksQualification = baseQualification;
+	    AssignmentGroupManager.addAssignmentSubgroup("Tasks", "Search", searchTasksQualification);
+    }
+%>
+
+<%@page import="java.util.*"%>
+<%!
+    public static class AssignmentGroupManager {
+	
+        private static HashMap<String,HashMap<String,AssignmentList>> groupMap = new LinkedHashMap();
+
+        public static String[] getGroups() {
+            return groupMap.keySet().toArray(new String[groupMap.size()]);
+        }
+
+        public static AssignmentList getAssignmentList(String groupName, String subgroupName) {
+        	AssignmentList result = null;
+            if (!groupMap.containsKey(groupName)) {
+                throw new RuntimeException("Trying to retrieve the '"+
+                    subgroupName+"' Subgroup from a Group that does not "+
+                    "exist: '"+groupName+"'. Please validate the "+
+                    "THEME_ROOT/jsp/pages/portal/configuration/" +
+                    "assignmentGroups.jspf configuration file.");
+            } else {
+                HashMap<String,AssignmentList> subgroupMap = groupMap.get(groupName);
+                result = subgroupMap.get(subgroupName);
+            }
+            return result;
+        }
+
+        public static AssignmentList[] getAssignmentLists(String groupName) {
+            HashMap<String,AssignmentList> subgroupMap = groupMap.get(groupName);
+            if (subgroupMap == null) {
+                throw new RuntimeException("Unable to retrieve assignment list.");
+            }
+            return subgroupMap.values().toArray(new AssignmentList[subgroupMap.size()]);
+        }
+
+        public static void addAssignmentGroup(String groupName) {
+            if (groupMap.containsKey(groupName)) {
+                throw new RuntimeException("Trying to add a Group that " +
+                    "already exists: '"+groupName+"'. Please validate the " +
+                    "THEME_ROOT/jsp/pages/portal/configuration/" +
+                    "assignmentGroups.jspf configuration file.");
+            }
+            groupMap.put(groupName, new LinkedHashMap());
+        }
+
+        public static void addAssignmentSubgroup(String groupName, String subgroupName, String qualification) {
+            if (!groupMap.containsKey(groupName)) {
+                throw new RuntimeException("Trying to add a Subgroup to a " +
+                    "Group that does not exist: '"+groupName+"'. Please " +
+                    "validate the THEME_ROOT/jsp/pages/portal/configuration/" +
+                    "assignmentGroups.jspf configuration file.");
+            } else {
+                HashMap<String,AssignmentList> subgroupMap = groupMap.get(groupName);
+                AssignmentList assignmentList = new AssignmentList(groupName, subgroupName, qualification);
+                if (subgroupMap.containsKey(assignmentList.getNameDigest())) {
+                    throw new RuntimeException("Trying to add a Subgroup " +
+                        "that already exists: '"+subgroupName+"' to the '"+
+                        groupName+"' group.  Please validate the" +
+                        "THEME_ROOT/jsp/pages/portal/configuration/" +
+                        "assignmentGroups.jspf configuration file.");
+                }
+                subgroupMap.put(assignmentList.getName(), assignmentList);
+            }
+        }
+    }
+%>

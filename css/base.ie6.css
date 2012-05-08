@@ -1,0 +1,15 @@
+.preRequiredLabel {
+    _left: expression(siHelper.setIE67PreRequired(this));
+}
+
+.preRequiredLabel span {
+    color: red !important;
+    display: block !important;
+    float: left;
+}
+
+.questionLabel span {
+    color: blue;
+    display: none;
+}
+

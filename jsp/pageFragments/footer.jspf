@@ -1,0 +1,3 @@
+<div id="footerSection" class="footerSection dynamicText ">
+	<%=ThemeLocalizer.getString(catalogResourceBundle,"Copyright") %> &copy; 2012 Acme
+</div>

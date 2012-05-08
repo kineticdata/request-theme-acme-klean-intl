@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%--
+    Configure the HTTP Content-Type header value to specify UTF-8
+--%>
+<%@page contentType="text/html; charset=UTF-8"%>
+<%--
+    Initialize the reference to the ThemeConfig (HashMap) bean.  This bean is
+    initialized in the THEME_ROOT/config/config.jsp file and further attributes
+    are added by the THEME_ROOT/jsp/includes/themeInitialization.jsp file.
+--%>
+<%@include file="../helpers/themeHelper.jspf"%>
+<%--
+    Configuration setting that trims all of the whitespace that is created by
+    using JSP comments (such as this one) and other JSP tags.
+--%>
+<%--
+<%@page trimDirectiveWhitespaces="true"%>
+--%>
+<%--
+    Load the theme configuration JSP file (this contains settings such as the
+    company or site name).
+
+    This file also initializes the ThemeConfig (HashMap) bean.
+--%>
+<%@include file="../../config/config.jsp" %>
+
+<%--
+    Set the attributes necessary for the theme to function.  These are typically
+    namespaced with the prefix "com.kd.themes" to avoid collisions with other
+    session attributes.
+--%>
+<%
+    /**
+     * Define the root attribute.
+     *
+     * Note that the path string does not end with a '/'.  Paths that
+     * concatenate values with this attribute should ensure the appended path
+     * starts with a '/'.
+     *
+     * Example (assuming a default installation):
+     *   /kinetic/themes/THEME_NAME
+     * Example (assuming Kinetic SR was installed to an alternate location):
+     *   /services/portfolio/themes/THEME_NAME
+     */
+    ThemeConfig.put("root", getThemeRoot(request));
+    /** Set the name of the catalog that this page is using. */
+    ThemeConfig.put("catalogName", customerSurvey.getCategory());
+    /** Set the name of the catalog that this page is using. */
+    ThemeConfig.put("templateName", customerSurvey.getSurveyTemplateName());
+
+    /** Set the default helper context. */
+    if (customerSurvey.getRemedyHandler() != null) {
+        ThemeConfig.put("defaultContext", customerSurvey.getRemedyHandler().getDefaultHelperContext());
+    }
+
+    ThemeConfig.put("context", UserContext.getArContext());
+%>
+<link rel="stylesheet" type="text/css" href="<%=(String)ThemeConfig.get("root")+"/config/config.css"%>" />
+
+<%!
+    /**
+     * Returns a String representing the path to the root of the themes.
+     *
+     * Example (assuming a default installation):
+     *   /kinetic/themes/THEME_NAME
+     * Example (assuming Kinetic SR was installed to an alternate location):
+     *   /services/portfolio/themes/THEME_NAME
+     */
+    public static String getThemeRoot(HttpServletRequest request) {
+        String requestUri = request.getRequestURI();
+        int startOfThemeName = requestUri.indexOf("/themes/")+"/themes/".length();
+        int endOfThemeName = requestUri.indexOf("/", startOfThemeName);
+        String themeRoot = requestUri.substring(0, endOfThemeName);
+	        return themeRoot;
+    }
+%>

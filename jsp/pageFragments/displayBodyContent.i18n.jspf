@@ -1,0 +1,101 @@
+<%--
+    This file should be included in any bundle or package pages that render a
+    Kinetic SR form in display mode.  The file defines the HTML body content
+    responsible for rendering the Kinetic form to the client.
+
+    This file includes the current Kinetic SR form page content.  The page
+    content, which will typically include one or more questions and a submit or
+    next page button, is displayed within the pageQuestionsForm.  This HTML form
+    will send the answer content to the Kinetic SubmitPage servlet for
+    processing.  This servlet will typically send a HTTP (302) Moved response
+    to redirect the client to the next page.
+
+    In general, this file should not be modified.
+--%>
+<!-- START Kinetic Form Content -->
+<form name='pageQuestionsForm' id='pageQuestionsForm' class='pageQuestionsForm' method='post' action='SubmitPage'>
+    <%
+      com.kd.ksr.beans.Page ppage = com.kd.ksr.cache.PageCache.getPageByInstanceId(customerSurvey.getSurveyTemplateInstanceID(), customerSurvey.getPageInstanceID());
+      SimpleEntry[] questions = ppage.getPageQuestions();
+    %>
+
+    <!-- Kinetic SR Form Page Content -->
+    <%
+    long startSub = System.currentTimeMillis();
+    
+        String pageContent = customerSurvey.getQuestions();
+        for (SimpleEntry questionEntry : questions) {
+            com.kd.ksr.beans.Question question = new com.kd.ksr.beans.Question(questionEntry);
+            String pat = "(id='QLABEL_"+question.getId()+".*>)(.*) ";
+            java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(pat);
+            java.util.regex.Matcher matcher = pattern.matcher(pageContent);
+
+            // Build up the results string
+            StringBuilder builder = new StringBuilder();
+            int lastMatch = 0;
+            while(matcher.find()) {
+                // Retrieve the necessary values
+                String preMatch = pageContent.substring(lastMatch, matcher.start());
+                String preLabel = matcher.group(1);
+                String label = matcher.group(2);
+                // Append any part of the qualification that exists before the match
+                builder.append(preMatch);
+                // Append the encoded parameter value
+                //System.out.println("Question Label:"+label+" translated:"+ThemeLocalizer.getString(catalogResourceBundle,label));
+                builder.append(preLabel+ThemeLocalizer.getString(catalogResourceBundle,label));
+                // Set the lastMatch index for use in the next loop
+                lastMatch = matcher.end();
+            }
+            // Append any part of the qualification remaining after the last match
+            builder.append(pageContent.substring(lastMatch));
+            pageContent = builder.toString();
+        }
+        
+        // Find all LOCALIZE tags and translate
+        java.util.List<String> matchedValues = new java.util.ArrayList<String>();
+        String localizePat = "<LOCALIZE>(.*?)</LOCALIZE>";
+        java.util.regex.Pattern localizePattern = java.util.regex.Pattern.compile(localizePat);
+        java.util.regex.Pattern valuePattern = java.util.regex.Pattern.compile("E>(.*?)</");
+        java.util.regex.Matcher localizeMatcher = localizePattern.matcher(pageContent);
+
+        while(localizeMatcher.find()) {
+            String matchString = localizeMatcher.group();
+            matchedValues.add(matchString);
+            //System.out.println("Found:"+matchString);            
+        }
+
+        java.util.Iterator<String> iterator = matchedValues.iterator();
+	while (iterator.hasNext()) {
+            String matchString = (String)iterator.next();
+                
+            java.util.regex.Matcher matcher = valuePattern.matcher(matchString);
+            matcher.find();
+            String origValue=matcher.group().replaceFirst("E>", "")
+						.replaceFirst("</", "");
+            String translatedValue=ThemeLocalizer.getString(catalogResourceBundle,origValue);
+            //System.out.println("Value:"+origValue+" translate:"+translatedValue);
+            
+            pageContent=pageContent.replaceAll(matchString, translatedValue);
+	}
+ 
+        
+      long endSub = System.currentTimeMillis();
+    System.out.println("End Substition:"+(endSub-startSub)+"ms");
+    %>
+    <%= pageContent %>
+
+    <!-- Kinetic SR Reference Values -->
+    <% if (request.getParameter("srv") != null) { %>
+    <input type="hidden" name="srv" value="<%=request.getParameter("srv")%>"/>
+    <% } %>
+    <% if (request.getParameter("csrv") != null) { %>
+    <input type="hidden" name="csrv" value="<%=request.getParameter("csrv")%>"/>
+    <% } %>
+
+    <!-- Kinetic SR State Values -->
+    <input type="hidden" name="templateID" id= "templateID" value="<%=customerSurvey.getSurveyTemplateInstanceID()%>"/>
+    <input type="hidden" name="sessionID" id="sessionID" value="<%=customerSurvey.getCustomerSessionInstanceID()%>"/>
+    <input type="hidden" name="surveyRequestID" id="surveyRequestID" value="<%=customerSurvey.getCustomerSurveyRequestID()%>"/>
+    <input type="hidden" name="pageID" id="pageID"value="<%=customerSurvey.getPageInstanceID()%>"/>
+</form>
+<!--   END Kinetic Form Content -->

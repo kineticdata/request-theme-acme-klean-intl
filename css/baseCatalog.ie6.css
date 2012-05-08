@@ -1,0 +1,31 @@
+#serviceItemsHolder {
+	height:expression(if (this.parent.clientHeight==undefined||this.parent.clientHeight<500){"500px"}else{"auto"});
+}
+
+.searchCategoryLabelHolder {
+	width:160px;
+}
+
+#searchResults_ServiceItems {
+	width:170px; 
+}
+
+.searchReturnResult {
+	left:-5px;
+	width:360px;
+}
+
+.launch_serviceItem {
+    height: 100%;
+}
+.categoryServiceItemsDiv {
+	height:500px;
+}
+
+#serviceItemsList_holder {
+	height:auto;
+}
+
+#serviceItemLaunch_holder {
+	height:auto;
+}

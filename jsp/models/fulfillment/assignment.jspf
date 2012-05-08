@@ -1,0 +1,88 @@
+<%!
+    public static class Assignment {
+        public static final String FORM_NAME = "KS_RQT_Assignment_WorkOrder_join";
+        public static final String FIELD_ASSIGNMENT_ID = "536870914";
+        public static final String FIELD_CREATE_DATE = "3";
+        public static final String FIELD_DUE_DATE = "740000005";
+        public static final String FIELD_REQUEST_NAME = "600000300";
+        public static final String FIELD_REQUEST_ID = "700088607";
+        public static final String FIELD_REQUEST_GUID = "600000310";
+        public static final String FIELD_ASSIGNED_IND_ID = "740000001";
+        public static final String FIELD_STATUS = "7";
+        public static final String FIELD_ASSIGNED_IND_FIRST_NAME = "740000002";
+        public static final String FIELD_ASSIGNED_IND_LAST_NAME = "740000014";
+        public static final String FIELD_ASSIGNED_GROUP_ID = "740000003";
+        public static final String FIELD_ASSIGNED_GROUP_NAME = "740000004";
+        public static final String FIELD_SOURCE_ID = "740000007";
+        public static final String FIELD_SOURCE_GUID = "740000008";
+        public static final String FIELD_SYSTEM_SOURCE_NAME = "740000013";
+        public static final String FIELD_CATALOG = "740000012";
+        public static final String FIELD_REQUESTER_FIRST_NAME = "400007300";
+        public static final String FIELD_REQUESTER_LAST_NAME = "400007500";
+        public static final String FIELD_REQUESTER_EMAIL = "700004000";
+
+        public static final String[] FIELD_IDS = new String[] {
+        	FIELD_ASSIGNMENT_ID, FIELD_CREATE_DATE, FIELD_DUE_DATE, FIELD_REQUEST_NAME, FIELD_REQUEST_ID, FIELD_REQUEST_GUID,  
+        	FIELD_STATUS, FIELD_ASSIGNED_IND_ID, 
+        	FIELD_ASSIGNED_IND_FIRST_NAME, FIELD_ASSIGNED_IND_LAST_NAME,
+        	FIELD_ASSIGNED_GROUP_ID, FIELD_ASSIGNED_GROUP_NAME, 
+        	FIELD_SOURCE_ID, FIELD_SOURCE_GUID, FIELD_SYSTEM_SOURCE_NAME,
+        	FIELD_CATALOG, FIELD_REQUESTER_FIRST_NAME, FIELD_REQUESTER_LAST_NAME, FIELD_REQUESTER_EMAIL
+        };
+
+        public static Assignment[] find(HelperContext context, String qualification) {
+        	Assignment[] results = new Assignment[0];
+
+            SimpleEntry[] entries = Base.find(context, FORM_NAME, qualification, FIELD_IDS);
+            if (entries != null && entries.length > 0) {
+                results = new Assignment[entries.length];
+                for(int i=0;i<results.length;i++) {
+                    results[i] = new Assignment(entries[i]);
+                }
+            }
+
+            return results;
+        }
+
+        public static Assignment[] find(HelperContext context, String qualification, String[] sortFields, Integer chunkSize, Integer recordOffset, Integer sortOrder) {
+        	Assignment[] results = new Assignment[0];
+            SimpleEntry[] entries = Base.find(context, FORM_NAME, qualification, FIELD_IDS, sortFields, chunkSize, recordOffset, sortOrder);
+            if (entries != null && entries.length > 0) {
+                results = new Assignment[entries.length];
+                for(int i=0;i<results.length;i++) {
+                    results[i] = new Assignment(entries[i]);
+                }
+            }
+
+            return results;
+        }
+
+		public void saveAssignment(HelperContext context, String assignmentID, String loginName) {
+		
+		}
+		
+        private SimpleEntry entry = null;
+
+        public Assignment(SimpleEntry entry) {
+            this.entry = entry;
+        }
+
+        public String getAssignmentID() {return entry.getEntryFieldValue(FIELD_ASSIGNMENT_ID);}
+        public String getCreateDate() {return entry.getEntryFieldValue(FIELD_CREATE_DATE);}
+        public String getDueDate() {return entry.getEntryFieldValue(FIELD_DUE_DATE);}
+        public String getRequestName() {return entry.getEntryFieldValue(FIELD_REQUEST_NAME);}
+        public String getRequestID() {return entry.getEntryFieldValue(FIELD_REQUEST_ID);}
+        public String getRequestGUID() {return entry.getEntryFieldValue(FIELD_REQUEST_GUID);}
+        public String getStatus() {return entry.getEntryFieldValue(FIELD_STATUS);}
+        public String getIndividualID() {return entry.getEntryFieldValue(FIELD_ASSIGNED_IND_ID);}
+        public String getIndividualName() {return entry.getEntryFieldValue(FIELD_ASSIGNED_IND_FIRST_NAME)+" "+entry.getEntryFieldValue(FIELD_ASSIGNED_IND_LAST_NAME);}
+        public String getGroupID() {return entry.getEntryFieldValue(FIELD_ASSIGNED_GROUP_ID);}
+        public String getGroupName() {return entry.getEntryFieldValue(FIELD_ASSIGNED_GROUP_NAME);}
+        public String getSourceID() {return entry.getEntryFieldValue(FIELD_SOURCE_ID);}
+        public String getSourceGUID() {return entry.getEntryFieldValue(FIELD_SOURCE_GUID);}
+        public String getSourceName() {return entry.getEntryFieldValue(FIELD_SYSTEM_SOURCE_NAME);}
+        public String getCatalogName() {return entry.getEntryFieldValue(FIELD_CATALOG);}
+        public String getRequesterName() {return entry.getEntryFieldValue(FIELD_REQUESTER_FIRST_NAME) +" "+entry.getEntryFieldValue(FIELD_REQUESTER_LAST_NAME);}
+        public String getRequesterEmail() {return entry.getEntryFieldValue(FIELD_REQUESTER_EMAIL);}
+    }
+%>

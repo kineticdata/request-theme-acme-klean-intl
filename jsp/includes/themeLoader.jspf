@@ -1,0 +1,23 @@
+<%--
+    Configuration setting that trims all of the whitespace that is created by
+    using JSP comments (such as this one) and other JSP tags.
+--%>
+<%--
+<%@page trimDirectiveWhitespaces="true"%>
+--%>
+<%--
+    Include the helper files.
+--%>
+<%@include file="../helpers/dateHelper.jspf" %>
+<%@include file="../helpers/localize.jspf" %>
+
+<%--
+    Include the models.
+--%>
+<%@include file="../models/user.jspf" %>
+<%@include file="../models/base.jspf" %>
+<%@include file="../models/catalog.jspf" %>
+<%@include file="../models/category.jspf" %>
+<%@include file="../models/submission.jspf" %>
+<%@include file="../models/submissionList.jspf" %>
+<%@include file="../models/template.jspf" %>

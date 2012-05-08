@@ -1,0 +1,63 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+
+<%-- CSS --%>
+<link rel="stylesheet" type="text/css" href="<%=(String)ThemeConfig.get("root")+"/css/yui-skin/datatable.css"%>" />
+<link rel="stylesheet" type="text/css" href="<%=(String)ThemeConfig.get("root")+"/css/yui-skin/paginator.css"%>" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() + "/resources/css/kd_panel.css"%>" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() + "/resources/css/kd_review.css"%>" />
+<link rel="stylesheet" type="text/css" href="<%=(String)ThemeConfig.get("root")+"/css/base.css"%>" />
+<% if (request.getAttribute("Catalog")!=null && ((String)request.getAttribute("Catalog")).equals("TRUE")){ %>
+	<link rel="stylesheet" type="text/css" href="<%=(String)ThemeConfig.get("root")+"/css/baseCatalog.css"%>" />
+	<!--[if IE 6]>
+	<link rel="stylesheet" type="text/css" href="<%=(String)ThemeConfig.get("root") + "/css/baseCatalog.ie6.css"%>" />
+	<![endif]-->
+	<!--[if IE 7]>
+	<link rel="stylesheet" type="text/css" href="<%=(String)ThemeConfig.get("root") + "/css/baseCatalog.ie7.css"%>" />
+	<![endif]-->
+	
+	<link rel="stylesheet" type="text/css" href="<%=(String)ThemeConfig.get("root")+"/css/ks_task_detail.css"%>" />
+<% }%>
+<!--[if IE 6]>
+<link rel="stylesheet" type="text/css" href="<%=(String)ThemeConfig.get("root") + "/css/base.ie6.css"%>" />
+<![endif]-->
+<!--[if IE 7]>
+<link rel="stylesheet" type="text/css" href="<%=(String)ThemeConfig.get("root") + "/css/base.ie7.css"%>" />
+<![endif]-->
+<% if((customerSurvey.getStylesheetFileName() != null) &&  (customerSurvey.getStylesheetFileName().trim().length() > 0)){%>
+<link href="<%= customerSurvey.getStylesheetFileName() %>" rel="stylesheet" type="text/css"/>
+<%}%>
+
+<%-- Scripts --%>
+<% 
+  String debugParam = (String)request.getParameter("debugjs");
+  boolean debug = false;
+  if (debugParam != null) {
+      debug = Boolean.valueOf(debugParam).booleanValue();
+  }
+%>
+<% if (debug) { %>
+<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/kd_actions.js"%>"></script>
+<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/kd_utils.js"%>"></script>
+<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/kd_client.js"%>"></script>
+<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/kd_catalogUtils.js"%>"></script>
+<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/kd_review.js"%>"></script>
+<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/kd_date.js"%>"></script>
+<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/extensions/kd_panel.js"%>"></script>
+<% } else { %>
+<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/kd_complete.js"%>"></script>
+<% } %>
+<% if (request.getAttribute("Catalog")!=null && ((String)request.getAttribute("Catalog")).equals("TRUE")){ %>
+	<script type="text/javascript" src="<%=(String)ThemeConfig.get("root")+"/js/catalog.js"%>"></script>
+<% }%>	
+<script type="text/javascript" src="<%=(String)ThemeConfig.get("root")+"/js/singletable.js"%>"></script>
+<script type="text/javascript" src="<%=(String)ThemeConfig.get("root")+"/js/twotable.js"%>"></script>
+<script type="text/javascript" src="<%=(String)ThemeConfig.get("root")+"/js/groupeddatatable.js"%>"></script>
+
+
+<script type="text/javascript" src="<%=(String)ThemeConfig.get("root")+"/js/service_item.js"%>"></script>
+<% if((customerSurvey.getJavascriptFileName() != null) &&  (customerSurvey.getJavascriptFileName().trim().length() > 0)){%>
+<script type="text/javascript" src="<%=customerSurvey.getJavascriptFileName().trim()%>"></script>
+<%}%>
+
+

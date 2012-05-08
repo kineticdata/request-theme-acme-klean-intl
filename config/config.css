@@ -1,0 +1,24 @@
+.primaryColor { color: #009900; } /* Dark Green */
+.primaryColorBackground { background-color: #009900; }
+.primaryColorBorder { border-color: 1px solid #009900; }
+
+.secondaryColor {color: #99CC99; } /* Ligher Green */
+.secondaryColorBackground {background-color: #99CC99; }
+.secondaryColorBorder {border-color: #99CC99; }
+
+.tertiaryColor { color: #006699; } /* Blue */
+.tertiaryColorBackground { background-color: #006699; }
+.tertiaryColorBorder { border-color: solid 1px #006699; }
+
+.auxiliaryColor {color: #666666;} /* Gray */
+.auxiliaryColorBackground {background-color: #666666;}
+.auxiliaryColorBorder {border-color: #666666;}
+
+.auxiliaryTitleColor {color: #777;}
+
+.logo {
+    background: url('../images/logo.png');
+    border: none;
+    height: 64px;
+    width: 64px;
+}

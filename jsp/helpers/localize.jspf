@@ -1,0 +1,41 @@
+<%!
+    public static class ThemeLocalizer {
+        public static String preferredLocale="";
+        
+        public static String getPreferredLocale(Cookie[] cookies){
+            ThemeLocalizer.preferredLocale="";
+            for (int i=0; i<cookies.length;i++){
+                String name=cookies[i].getName();
+                if (name.equals("preferredLocale")){
+                    preferredLocale=cookies[i].getValue();
+                    break;
+                }
+            }
+            return ThemeLocalizer.preferredLocale;
+        }
+        
+        public static java.util.ResourceBundle getResourceBundle(String bundleName, String preferredLocale){
+            java.util.ResourceBundle rb=null;
+            if (preferredLocale.length()>0){
+                String vals[] = preferredLocale.split("_");
+                   rb = java.util.ResourceBundle.getBundle(bundleName, new Locale(vals[0], (vals.length>1)?vals[1]:""));
+            }else {
+                   rb = java.util.ResourceBundle.getBundle(bundleName);
+            }
+            
+            return rb;
+        }
+        public static String getString(java.util.ResourceBundle resourceBundle, String key) {
+            try {
+                String formatKey=key.replaceAll(" ","_");
+                String translatedString=resourceBundle.getString(formatKey);
+                if (translatedString.equals(formatKey)){
+                    return key;
+                } 
+                return translatedString;
+            } catch(Exception e){
+                return key;
+            }
+        }
+    }
+%>

@@ -1,0 +1,24 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+
+<%-- CSS --%>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() + "/resources/js/yui/build/calendar/assets/calendar.css"%>"/>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() + "/resources/js/yui/build/container/assets/container.css"%>"/>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() + "/resources/js/yui/build/container/assets/skins/sam/container.css"%>"/>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() + "/resources/js/yui/build/tabview/assets/skins/sam/tabview.css"%>"/>
+
+<%-- Scripts --%>
+<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/utilities/utilities.js"%>"></script>
+<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/container/container-min.js"%>"></script>
+<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/button/button-min.js"%>"></script>
+<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/event-simulate/event-simulate-min.js"%>"></script>
+<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/datasource/datasource-debug.js"%>"></script>
+<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/datatable/datatable-debug.js"%>"></script>
+<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/paginator/paginator-debug.js"%>"></script>
+<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/json/json-min.js"%>"></script>
+<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/calendar/calendar-min.js"%>"></script>
+<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/selector/selector-min.js"%>"></script>
+<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/tabview/tabview-min.js"%>"></script>
+<!-- 
+<script type="text/javascript" src="<%=request.getContextPath() + "/resources/js/yui/build/logger/logger-debug.js"%>"></script>
+ -->

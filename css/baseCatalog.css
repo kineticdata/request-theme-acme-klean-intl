@@ -1,0 +1,682 @@
+/* CSS Document */
+/*   
+	#009900  Dark Green 
+	#99CC99  Ligher Green 
+	#006699  Blue 
+	#666666  Gray 
+*/
+
+.contentPageSection{
+	min-height: 620px;
+}
+#popUps {
+	position:static !important; 
+	border:0 none;
+	height:0;margin:
+	0;overflow:hidden; 
+	float:left;	
+}
+
+.headerWelcome {
+  	X-moz-border-radius-bottomleft:6px;
+  	X-webkit-border-bottom-left-radius:6px;
+  	X-moz-border-radius-bottomright:6px;
+  	X-webkit-border-bottom-right-radius:6px;
+}
+
+.welcomeText{
+    float: left;
+    margin: 0;
+    padding-right: 10px;
+}
+
+.welcomeLoginName{
+	margin:0;
+	float: left;
+	*float: none;
+}
+
+.loginBox {
+    width:50%;
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:50px;
+    margin-top:10px;
+    margin-left:25%;
+}
+
+.loginErrorMessage{
+    margin: 10px 0;
+    padding: 4px;
+	border-top: 2px solid #dd0000;
+    border-bottom: 2px solid #dd0000;
+	font-weight:bold;
+	visibility:hidden;
+	color: #dd0000;
+}
+.siName {
+    font-weight: bold;
+    position: relative;
+    font-size: 1.1em
+}
+.catalogRedirectLink {
+    margin:15%;
+    font-weight:bold;
+}
+
+#paginated {
+	text-align: center;
+}
+#paginated table {
+	margin-left:auto; margin-right:auto;
+}
+#paginated, #paginated .yui-dt-loading {
+	text-align: center; background-color: transparent;
+}
+
+
+#selectedServiceItems.yui-dt-paginator {
+	display:none;
+}
+
+
+
+.highlightServiceItem{
+	color: #009900 !important;
+}
+
+.highlightCategory {
+	color: #009900;
+}
+
+.requestLink {
+	color:#006699 !important;
+	text-decoration:underline !important;
+}
+
+.templateSection{
+	left:0;
+	width:100%;
+	background-color:transparent;
+}
+
+
+.templateContent.catalogTemplate {
+    background-color: transparent;
+    border: 0 solid lightgrey;
+    float: left;
+    margin: 0;
+    padding: 0 0 0;
+    width: 70%;
+}
+
+#contentSection {
+	float: left;
+	width: 765px;
+}
+
+#serviceCatalogName {
+    padding-top: 5px !important;
+	color: #FFFFFF;
+    font-size:13px;
+	FONT-WEIGHT: bold;
+	text-align:center;    
+}
+
+#serviceItemsHolder {
+	min-height: 500px;
+}
+
+.searchInput input {
+	background-color:#99CC99;
+	background-image:url("/kinetic/themes/acme/images/searchInput.gif");
+	background-repeat: no-repeat;
+	border:0 none;
+}
+
+.userInfoSection {
+	background-color:#006699;
+	color:#FFFFFF;
+	height:125px;
+	left:252px;
+	position:absolute;
+	width:260px;
+	z-index:4000;
+  	X-moz-border-radius-topright:6px;
+  	X-webkit-border-top-right-radius:6px;
+  	X-moz-border-radius-bottomright:6px;
+  	X-webkit-border-bottom-right-radius:6px;
+  	X-moz-border-radius-bottomleft:6px;
+  	X-webkit-border-bottom-left-radius:6px;
+
+}
+
+.userInfo {
+	color:#FFFFFF;
+	padding:4px;
+}
+
+.actionItemRowLine {
+	border-top-color:#FFFFFF;
+	border-top-style:solid;
+	border-top-width:1px;
+}
+
+#myServiceItemSummary{
+	padding-top:30px;
+}
+
+.requestsPanel {
+	background-color:#E8E8E8 !important;
+	height:492px;
+	left:0;
+	position:absolute;
+	top:14px;
+	width:765px;
+	z-index:1000;
+	font-size: 11px;
+}
+
+.search_noItems {
+	display: none;
+
+}
+
+.searchCategoryLabelHolder {
+	float:left;
+	height:500px;
+	padding-left:10px;;
+    padding-top:15px;
+	width:180px;
+	background-color:#FFFFFF !important;
+}
+
+.serviceItemsLayer {
+	position: static;
+}
+#searchResults_ServiceItems {
+	float:left;
+	height:auto;
+	width:154px;
+	min-height: 500px;
+	background-color:#F8F8F8 !important;
+	background-image:url("../images/background_large_1.png");
+    background-position:left center;
+    background-repeat:no-repeat;
+}
+
+.searchReturnResult {
+	color:#666666;
+	height:auto;
+	left:-8px;
+	position:absolute !important;
+	top:-525px;
+	width:346px;
+	z-index:2000 !important;
+}
+
+.searchReturnResult a {
+	cursor:pointer;
+}
+
+.serviceItemResults {
+	border-left: 1px solid lightgrey;
+	border-top: 1px solid lightgrey;
+	border-bottom: 1px solid lightgrey;
+}
+
+.searchReturnResult a {
+	cursor:pointer;
+}
+.searchLink{
+	color:#666666 !important;
+	text-decoration:none  !important;
+}
+
+
+.launch_serviceItem {
+    vertical-align:top;
+    height: auto;
+    min-height: inherit;
+    background-color:#F8F8F8;
+    X-webkit-border-radius: 6px;
+    X-moz-border-radius: 6px;
+}
+
+.continueButton {
+	background-color:#99CC99;
+	float:none;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:20px;
+	padding:0px;
+	text-align:center;
+	width:100px;
+}
+
+a:visited.continueButton,a:link.continueButton{
+	text-decoration: none;
+	color: #666666;
+}
+
+.requestsSelected {
+	border-top-color: #009900 !important;
+}
+
+
+.categorySelected {
+	border-top-color: #009900 !important;
+	color:#009900 !important;
+}
+
+.serviceItemSelected {
+	color: #009900 !important;
+}
+
+#categoryItems {
+	float:left;
+	overflow:hidden;
+	padding-top:30px;
+	width:25%;
+}
+
+.categoryItem {
+	border-top:1px solid #FFFFFF;
+	color:#666666;
+	font-size:14px;
+	font-weight:bold;
+	overflow:visible;
+	padding-bottom:8px;
+	padding-top:8px;
+}
+
+.categoryServiceItemsDiv {
+	background-color:#F8F8F8;
+	background-image:url("../images/background_large_1.png");
+    background-repeat:no-repeat;
+    background-position:top;
+	border:1px solid lightgrey;
+	float:left;
+	height:auto;
+	min-height: inherit;
+	margin-top:10px;
+	overflow:hidden;
+	width:545px;
+}
+
+.quick_linksDiv {
+	color:#404142;
+}
+
+.quick_link {
+	border-bottom:1px solid #009900;
+	font-weight:bold;
+	padding-bottom:5px;
+	padding-top:5px;
+	width:90%;
+}
+
+#quick_links_label {
+	background-color:#009900;
+	font-size:13px;
+	font-weight:bold;
+	margin-left:0;
+	text-align:center;
+	top:-8px;
+	width:158px;
+	color: #FFFFFF;
+}
+
+#quick_links {
+	height:100%;
+	margin-right:15px;
+	margin-top:15px;
+}
+
+#quick_links_border {
+	height:100%;
+}
+
+.category_item_label {
+	background-color:#FFFFFF;
+	display:inline;
+	padding-right:4px;
+	top:-17px;
+	cursor:pointer;
+}
+
+.serviceItem_item {
+	color:#666666;
+	margin-top:15px;
+	width:140px;
+	cursor: pointer;
+	text-align:right;
+	font-weight:bold;
+}
+
+#serviceItemsList_holder {
+	float:left;
+	width:150px;
+    height:auto;
+    min-height: inherit;
+}
+
+#serviceItemLaunch_holder {
+	border-left:1px solid #A9ABAC;
+	color:#404142;
+	float:left;
+	width:394px;
+    height:auto;
+    min-height: inherit;
+}
+
+.catalogSearchSection {
+	X-moz-border-radius-bottomright:6px;
+  	X-webkit-border-bottom-right-radius:6px;
+
+	X-moz-border-radius-topright:6px;
+  	X-webkit-border-top-right-radius:6px;
+
+	background-color:#99CC99;
+	float:left;
+	height:26px;
+	left:2%;
+	overflow:hidden;
+}
+
+.catalogTitleSection{
+	background-color:#009900;
+	float:left;
+	height:26px;
+	left:2%;
+	overflow:hidden;
+	width:26%;
+
+  	X-moz-border-radius-topleft:6px;
+  	X-webkit-border-top-left-radius:6px;
+  	X-moz-border-radius-bottomleft:6px;
+  	X-webkit-border-bottom-left-radius:6px;
+}
+
+.serviceItemSummary{
+	padding: 0px;
+}
+
+.summaryItem_active{
+	cursor:pointer;
+	padding-left:6px;
+	padding-top:2px;
+}
+
+.actionItemsSection {
+	float:left;
+	margin-top:23px;
+	width:120px;
+}
+
+.actionItemRow{
+  	X-moz-border-radius-topleft:6px;
+  	X-webkit-border-top-left-radius:6px;
+  	X-moz-border-radius-bottomleft:6px;
+  	X-webkit-border-bottom-left-radius:6px;
+
+	background-color:#666666;
+	color:#FFFFFF;
+	margin-bottom:40px;
+	margin-left:10px;
+	top:-10px;
+}
+
+.actionItemsTable{
+	background-color:transparent;
+	color:#000000;
+	font-size:11px;
+	font-weight:bold;
+}
+
+.allMyRequests{
+	margin-bottom:10px;
+}
+
+.allRequestsTable{
+	overflow:scroll-y;
+}
+
+.approvalRow{
+	color:#00FFFF;
+}
+
+.box_even{
+	margin-left:5px;
+	width: 49.5%;
+}
+
+.categoryBox{
+	float:left;
+	font-size:11px;
+	width:49%;
+	height:175px;
+	overflow:hidden;
+	background-color:#D3DEF8;
+}
+
+.categoryIconLayer{
+	margin-right: 5px;
+	margin-left:5px;
+	margin-top:15px;
+	float:left;
+	width:20%;
+	z-index:1;
+	height:120px;
+}
+
+.categoryLabel{
+	font-size:14px;
+	padding-bottom:2px;
+	padding-left:5px;
+	z-index:1;
+}
+
+.categoryLabelLayer{
+	float:left;
+	width:75%;
+	padding-top:5px;
+	border-bottom:1px solid #cccccc;
+	color:darkred;
+	z-index:1;
+}
+
+.categoryLabelSection {
+	cursor:pointer;
+	float:left;
+	margin-right:10px;
+	margin-top:43px;
+	width:30px;
+}
+
+.categoryLabelImage {
+	background-image:url("../images/Categories.gif");
+	background-repeat:no-repeat;
+	height:100px;
+	margin-top:20px;
+	width:100%;
+}
+
+.categoryLabelText {
+	background-color:#006699;
+  	X-moz-border-radius-topright:6px;
+  	X-webkit-border-top-right-radius:6px;
+  	X-moz-border-radius-bottomright:6px;
+  	X-webkit-border-bottom-right-radius:6px;
+
+	height: 100px;
+}
+
+.contentSection{
+	padding:0;
+	width:765px;
+	border:0 none;
+	margin:5px 0 0;
+	background-color: #FFFFFF !important;
+	float: left;
+}
+
+.fullCategoryBox{
+	font-size:.9em;
+}
+
+.fullCategoryDescription{
+	font-size:1em;
+}
+
+.fullCategoryHeader{
+	font-size:1.1em;
+}
+
+.headerInfoBlock{
+	width:185px;
+}
+
+.leftColumn{
+	background-color:#D3DEF8;
+	height:100%;
+	margin-right:2px;
+	width:136px !important;
+}
+
+.leftPhoto{
+	left:2px;
+	top:4px;
+	width:130px;
+	border:1px solid #CCCCCC;
+	margin-left:0;
+}
+
+.myServiceItems{
+	color:#666666;
+	font-size:11px;
+	width:99%;
+}
+
+.requestsHeader{
+	background-color: transparent;
+	background: -moz-linear-gradient(bottom, #CCCCCC, #FFFFFF);
+	filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#000000FF', EndColorStr='#50000000');
+}
+
+
+.requestsLayer{
+    color: #404142;
+    font-size: 11px;
+    width: auto;
+    height: 510px;
+}
+
+.row_even{
+	background-color:#CCCCCC;
+}
+
+.search_noItems{
+	display:none;
+}
+
+.standard_table{
+	font-size:11px;
+	border:1px solid #CCCCCC;
+}
+
+.statItem{
+	text-align:center;
+}
+
+.summaryItem{
+	cursor:pointer;
+	padding-left:6px;
+	padding-top:2px;
+	font-weight:bold;
+        min-height:15px;
+        padding-bottom:3px;
+}
+
+.taskDetails{
+	background-color:#EBEBEB;
+}
+
+.taskTable{
+	width:100%;
+	background-color:#FFFFFF;
+}
+
+a.catLink:visited, a.catLink:link{
+	font-size:14px;
+	font-weight:bold;
+	color:#FFFFFF;
+}
+
+.descriptionContent {
+    padding-top:5px;
+}
+
+.serviceItemDescriptionHeader {
+    padding:2px;
+    font-family: arial;
+    text-align:center;
+    background-color:#009900;
+    border:0;
+    color:#FFFFFF !important;
+    font-size: 14px;
+    font-weight:bold;
+}
+
+.descriptionContainer{
+    padding:15px 10px 10px 10px;
+}
+
+.ajax_load_img {
+    padding: 15px 10px 10px;
+}
+
+.UserLayer {
+    height:20px;
+}
+
+.PasswordLayer {
+    padding-top:5px;
+    height:20px;
+}
+
+.simpleLoginLabel {
+
+}
+
+.simpleLoginInput {
+    
+}
+
+.simplePassInput{
+    
+}
+
+#simpleLogin{
+    height:130px;
+}
+
+#simpleLogin_h {
+    background:none repeat scroll 0 0 #009900;
+    color:#FFFFFF;
+    cursor:move;
+}
+
+.leftCol{
+    width:30%;
+    float:left;
+}
+
+.rightCol{
+    width:69%;
+    float:left;
+}
+
+#yui-gen0-button{
+    color:#333333;
+}

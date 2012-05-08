@@ -1,0 +1,5 @@
+<!-- Configure an event to initialize the client manager after the window is loaded --> 
+<script type="text/javascript">
+	KD.utils.Action.addListener(window, "load", function() {clientManager.init()});
+</script>
+	

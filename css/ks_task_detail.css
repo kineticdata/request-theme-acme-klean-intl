@@ -1,0 +1,202 @@
+.showReply {
+	clear:both;
+	color:#404142 !important;
+	float:right;
+	font-weight:bold;
+}
+
+.ConversationDiv {
+	clear: both;
+}
+
+.conversationLabelHolder{
+	float:right;
+}
+
+.showConversation {
+	color:#404142 !important;
+	font-weight:bold;
+}
+
+.selReq {
+	height:100%;
+}
+
+.multipleTaskContainer {
+	border-left:solid 2px #006699;
+	float:left;
+	margin-bottom:4px;
+	padding-left:2px;
+	width:99.3%;
+}
+.selReqtasks .mainLevelTask {
+}
+
+.selReqtasks .taskIndent{
+	font-size:11px !important;
+	left:2%;
+	width:98% !important;
+}
+
+.selReqDetails {
+	float:left;
+	padding-bottom:4px;
+	width:100%;
+}
+
+.selReqDetails .right{
+	float: right;
+}
+
+.selReqDetails .left{
+	float: left;
+}
+
+.selReqDetails .detail{
+	border:solid 1px gray;
+	margin-top:3px;
+	padding:4px;
+}
+
+.selReqDetails .label{
+	float:left;
+	font-weight:bold;
+	padding-right:6px;
+	text-align:right;
+	width:17%;
+}
+.selReqDetails .value{
+}
+
+.selReqDetails .head{
+	background-color:#009900;
+	color:#FFFFFF;
+	height:16px;
+	padding:1px 8px;
+}
+
+  a:visited.selDetailsLinks, a:link.selDetailsLinks {
+	color:#FFFFFF;
+	text-decoration:underline;	
+}
+
+.selReqtasks {
+	float:left;
+	margin-top:4px;
+	width:99.7%;
+}
+
+.selReqtasks .task{
+	background-color:#C4E1C4;
+}
+
+.selReqtasks .Closed{
+	background-color: #E3F0E3 !important;
+}
+.task .label{
+	float:left;
+	font-weight:bold;
+	padding-right:6px;
+}
+
+.subtask .label{
+	float:left;
+	font-weight:bold;
+	padding-right:6px;
+}
+
+.selReqtasks .value{
+    float:left;
+}
+
+.selReqtasks .task{
+	border:solid 1px gray;
+	float:left;
+	margin-bottom:4px;
+	width:100%;
+}
+
+.selReqtasks .subtask{
+	border:solid 1px gray;
+	float:left;
+	left:2%;
+	margin-bottom:4px;
+	width:98%;
+}
+
+.task .date{
+	float:left;
+	padding:2px;
+	text-align:center;
+	width:12%;
+        background-image: url("/kinetic/themes/acme/images/blank_calendar_64x64.png");
+        background-position:center center;
+        background-repeat:no-repeat;
+        height:64px;
+        width:64px;
+}
+
+.subtask .date{
+	float:left;
+	padding:2px;
+	text-align:center;
+        width:12%;
+        background-image: url("/kinetic/themes/acme/images/blank_calendar_64x64.png");
+        background-position:center center;
+        background-repeat:no-repeat;
+        height:64px;
+        width:64px;
+}
+
+.task .body{
+        border-left:2px solid gray;
+	float:left;
+	min-height:64px;
+        height:64px;
+	padding:4px;
+	width:81%;
+}	
+
+.subtask .body{
+        border-left:2px solid gray;
+	float:left;
+	padding-left:5px;
+	padding-top:4px;
+	width:80%;
+        min-height:64px;
+        height:64px;
+}
+
+.selDetailsLinks {
+    color:#FFFFFF;
+    text-decoration:underline;
+    font-weight:bold;
+}
+
+.date .month {
+    color:#FFFFFF;
+    font-size:11px;
+    font-weight:bold;
+    padding-top:10px;
+}
+
+.date .day {
+    color:#009900;
+    font-size:24px;
+    font-weight:bold;
+    padding-top:2px;
+    width: 96%;
+}
+
+.year_time{
+    text-align: right;
+}
+
+.taskMsgs {
+    clear: both;
+}
+
+.taskMsg {
+    float: left;
+    width: 100%;
+}
